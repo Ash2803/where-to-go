@@ -1,9 +1,9 @@
 from django.urls import path
 
-from places.views import main, detail_place_view
+from places.views import places_view, detail_place_view
 
 
 urlpatterns = [
-    path('', main, name='main'),
-    path('places/<place_id>/', detail_place_view, name='place')
+    path('', places_view, name='places'),
+    path('place/<place_id>/', detail_place_view, name='place')
 ]
