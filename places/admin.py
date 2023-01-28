@@ -21,3 +21,4 @@ class PlaceAdmin(SortableAdminBase, ModelAdmin):
     inlines = [
         ImageInline,
     ]
+    search_fields = ['title',]
