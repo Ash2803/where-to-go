@@ -15,6 +15,16 @@ class Place(models.Model):
 class Image(models.Model):
     image = models.ImageField(verbose_name='Image', null=True, blank=True, upload_to='images/')
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images', verbose_name='place')
+    id = models.PositiveIntegerField(
+        default=0,
+        blank=False,
+        null=False,
+        db_index=True,
+        primary_key=True
+    )
 
     def __str__(self):
         return f'{self.id} {self.place.title}'
+
+    class Meta:
+        ordering = ['id']

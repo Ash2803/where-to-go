@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 from django.utils.safestring import mark_safe
-
+from adminsortable2.admin import SortableAdminBase
+from adminsortable2.admin import SortableStackedInline
 from places.models import Place, Image
 
 
-class ImageInline(admin.TabularInline):
+class ImageInline(SortableStackedInline):
     model = Image
     readonly_fields = ['get_preview', ]
 
@@ -16,7 +17,7 @@ class ImageInline(admin.TabularInline):
 
 
 @admin.register(Place)
-class PlaceAdmin(ModelAdmin):
+class PlaceAdmin(SortableAdminBase, ModelAdmin):
     inlines = [
         ImageInline,
     ]
