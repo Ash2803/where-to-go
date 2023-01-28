@@ -2,7 +2,7 @@
 A website for the tourists in Armenia where they can find an interesting places to visit.
 
 ### Where is the website?
-Just click [here]( https://github.com/Ash2803/where-to-go.git).
+Just click [here](http://ash28.pythonanywhere.com/).
 
 ### How to add more content?
 - Move to the [admin](http://127.0.0.1:8000/admin) panel and log in:
