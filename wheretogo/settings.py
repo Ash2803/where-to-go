@@ -26,7 +26,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ['DEBUG']
-ALLOWED_HOSTS = ['Ash28.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -120,12 +120,11 @@ USE_TZ = True
 
 STATIC_URL = os.environ.get('STATIC_URL', '/static/')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "places/static"),
+    os.path.join(BASE_DIR, "static/"),
 ]
-STATIC_ROOT = os.environ.get('STATIC_ROOT', os.path.join(BASE_DIR, 'places/assets'))
 
 MEDIA_URL = os.environ.get('MEDIA_URL', '/media/')
-MEDIA_ROOT = os.environ.get('MEDIA_ROOT', os.path.join(BASE_DIR, 'places/media'))
+MEDIA_ROOT = os.environ.get('MEDIA_ROOT', os.path.join(BASE_DIR, 'media/'))
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

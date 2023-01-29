@@ -7,3 +7,6 @@ urlpatterns = [
     path('', places_view, name='places'),
     path('place/<place_id>/', detail_place_view, name='place')
 ]
+
+
+

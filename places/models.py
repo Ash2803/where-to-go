@@ -12,21 +12,18 @@ class Place(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        unique_together = (('title', 'short_description', 'long_description'),)
+
 
 class Image(models.Model):
     image = models.ImageField(verbose_name='Image', null=True, blank=True, upload_to='images/', unique=True)
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images', verbose_name='place')
-    id = models.PositiveIntegerField(
-        default=0,
-        blank=False,
-        null=False,
-        db_index=True,
-        primary_key=True,
-        unique=True
-    )
+    image_order = models.PositiveIntegerField(blank=True, null=True, unique=True)
 
     def __str__(self):
         return f'{self.id} {self.place.title}'
 
     class Meta:
-        ordering = ['id']
+        ordering = ['image_order']
+        unique_together = (('image', 'place',),)
