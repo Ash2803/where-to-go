@@ -27,10 +27,9 @@ class Command(BaseCommand):
         except requests.exceptions.RequestException:
             traceback.print_exc()
             raise SystemExit()
-        try:
-            Place.objects.get(title=new_place['title'])
+        if Place.objects.filter(title=new_place['title']).exists():
             print(f"Place {new_place['title']} already exists.")
-        except Place.DoesNotExist:
+        else:
             obj = Place.objects.create(
                 title=new_place['title'],
                 long_description=new_place['description_long'],
