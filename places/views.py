@@ -32,7 +32,9 @@ def detail_place_view(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     formatted_place = {
         "title": place.title,
-        "imgs": [f'{settings.MEDIA_URL}{img_url}' for img_url in Image.objects.filter(place_id=place_id).values_list('image', flat=True)],
+        "imgs": [f'{settings.MEDIA_URL}{img_url}' for img_url in Image.objects.filter(place_id=place_id).values_list(
+            'image',
+            flat=True)],
         "description_short": place.short_description,
         "description_long": place.long_description,
         "coordinates": {
