@@ -23,8 +23,8 @@ class Command(BaseCommand):
             response = requests.get(link)
             response.raise_for_status()
             new_place = response.json()
-        except requests.exceptions.RequestException:
-            logging.error(f"{link} is not a valid url")
+        except requests.exceptions.RequestException as e:
+            logging.exception(e)
             exit()
         try:
             Place.objects.get(title=new_place['title'])
