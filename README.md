@@ -60,8 +60,14 @@ python3 -m venv venv
 ```
 pip install -r requirements.txt
 ```
-- Create `.env` file and set environment variables `SECRET KEY` and `DEBUG` = default is False.
-- Then create a DB by running `makemigrations` and `migrate` command:
+Create `.env` file and set environment variables:
+- `SECRET KEY` - your project secret key:
+- `DEBUG` = default is `False`. To enable debug mode set value to `True`;
+- `MEDIA_ROOT` = you can set your path where the media files will be stored, default = `media/`;
+- `MEDIA_URL` = default = `/media/`;
+- `STATIC_URL` = default = `/static/`;
+
+Then create a DB by running `makemigrations` and `migrate` command:
 ```
 python manage.py makemigrations
 python manage.py migrate
