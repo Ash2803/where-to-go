@@ -5,7 +5,7 @@ A website for the tourists in Armenia where they can find an interesting places 
 Just click [here](https://ash28003.pythonanywhere.com/).
 
 ### How to add more content?
-- Move to the admin panel of you website (`127.0.0.1:8000` or if you already deployed go to your `<username>.pythonanywhere.com`)
+- Move to the admin panel of your website (`127.0.0.1:8000` or if you already deployed go to your `<username>.pythonanywhere.com`)
 add `/admin` at the end of you website address.
 
 <img src="repo_images/img.png" width="300" alt="img">
