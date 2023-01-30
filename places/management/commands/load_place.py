@@ -44,4 +44,5 @@ class Command(BaseCommand):
                 image, created = Image.objects.get_or_create(place=obj, image=file_name)
                 image.image.save(file_name, file)
                 image.save()
-            print('New place added')
+            logging.info('Place added')
+
