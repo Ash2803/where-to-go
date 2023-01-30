@@ -1,4 +1,5 @@
 import logging
+import traceback
 
 import requests
 from django.core.files.base import ContentFile
@@ -23,9 +24,9 @@ class Command(BaseCommand):
             response = requests.get(link)
             response.raise_for_status()
             new_place = response.json()
-        except requests.exceptions.RequestException as e:
-            logging.exception(e)
-            exit()
+        except requests.exceptions.RequestException:
+            traceback.print_exc()
+            raise SystemExit()
         try:
             Place.objects.get(title=new_place['title'])
             print(f"Place {new_place['title']} already exists.")
