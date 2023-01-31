@@ -41,11 +41,13 @@ INSTALLED_APPS = [
     'adminsortable2',
     'tinymce',
     'places.apps.PlacesConfig',
+    'debug_toolbar',
 ]
 SERIALIZATION_MODULES = {
     "geojson": "django.contrib.gis.serializers.geojson",
 }
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,6 +58,9 @@ MIDDLEWARE = [
 ]
 CSRF_COOKIE_SECURE = True
 ROOT_URLCONF = 'wheretogo.urls'
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 TEMPLATES = [
     {

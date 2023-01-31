@@ -1,8 +1,8 @@
+from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, reverse
-from django.conf import settings
 
-from places.models import Place, Image
+from places.models import Place
 
 
 def places_view(request):
@@ -29,10 +29,10 @@ def places_view(request):
 
 
 def detail_place_view(request, place_id):
-    place = get_object_or_404(Place, pk=place_id)
+    place = get_object_or_404(Place.objects.prefetch_related('images'), pk=place_id)
     formatted_place = {
         "title": place.title,
-        "imgs": [f'{settings.MEDIA_URL}{img_url}' for img_url in Image.objects.filter(place_id=place_id).values_list(
+        "imgs": [f'{settings.MEDIA_URL}{img_url}' for img_url in place.images.values_list(
             'image',
             flat=True)],
         "description_short": place.short_description,
