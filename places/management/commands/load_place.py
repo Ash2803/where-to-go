@@ -30,12 +30,14 @@ class Command(BaseCommand):
         if Place.objects.filter(title=new_place['title']).exists():
             print(f"Place {new_place['title']} already exists.")
         else:
-            obj = Place.objects.create(
+            obj, created = Place.objects.update_or_create(
                 title=new_place['title'],
-                long_description=new_place['description_long'],
-                short_description=new_place['description_short'],
-                longitude=new_place['coordinates']['lng'],
-                latitude=new_place['coordinates']['lat']
+                defaults={
+                    'long_description': new_place['description_long'],
+                    'short_description': new_place['description_short'],
+                    'longitude': new_place['coordinates']['lng'],
+                    'latitude': new_place['coordinates']['lat']
+                }
             )
             for image_url in new_place['imgs']:
                 response = requests.get(image_url)
