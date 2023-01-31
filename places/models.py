@@ -19,7 +19,8 @@ class Place(models.Model):
 class Image(models.Model):
     image = models.ImageField(verbose_name='Image',
                               upload_to='images/',
-                              unique=True)
+                              unique=True,
+                              blank=False)
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images',
                               verbose_name='place')
     image_order = models.PositiveIntegerField(unique=True, null=True, blank=True)
