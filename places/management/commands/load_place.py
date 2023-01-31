@@ -7,6 +7,10 @@ from django.core.management.base import BaseCommand
 
 from places.models import Place, Image
 
+logging.basicConfig(level=logging.WARNING)
+logger = logging.getLogger(__name__)
+logger.setLevel(level=logging.WARNING)
+
 
 class Command(BaseCommand):
     help = 'Upload new place information'
@@ -28,7 +32,7 @@ class Command(BaseCommand):
             traceback.print_exc()
             raise SystemExit()
         if Place.objects.filter(title=new_place['title']).exists():
-            print(f"Place {new_place['title']} already exists.")
+            logging.info(f"Place {new_place['title']} already exists.")
         else:
             obj, created = Place.objects.update_or_create(
                 title=new_place['title'],
@@ -46,5 +50,5 @@ class Command(BaseCommand):
                 image, created = Image.objects.get_or_create(place=obj, image=file_name)
                 image.image.save(file_name, file)
                 image.save()
-            logging.info('Place added')
+            logging.info(f'Place {new_place["title"]} added')
 
