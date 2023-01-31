@@ -11,6 +11,7 @@ from places.models import Place, Image
 class ImageInline(SortableStackedInline):
     model = Image
     readonly_fields = ['get_preview', ]
+    extra = 1
 
     def get_preview(self, obj):
         return format_html("<img src={} {}>", mark_safe(obj.image.url), "height=150 width=150")
