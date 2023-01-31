@@ -13,9 +13,7 @@ class ImageInline(SortableStackedInline):
     readonly_fields = ['get_preview', ]
 
     def get_preview(self, obj):
-        return format_html("<img src={} {}>", mark_safe(obj.image.url), obj.image.url, height=10)
-
-        # mark_safe(f'<img src={obj.image.url} height="200">')
+        return format_html("<img src={} {}>", mark_safe(obj.image.url), "height=150 width=150")
 
     get_preview.short_description = 'Preview'
 
