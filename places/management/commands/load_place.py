@@ -33,24 +33,23 @@ class Command(BaseCommand):
             raise SystemExit()
         obj, created = Place.objects.update_or_create(
             title=new_place['title'],
+            longitude=new_place['coordinates']['lng'],
+            latitude=new_place['coordinates']['lat'],
             defaults={
-                'title': new_place['title'],
                 'long_description': new_place['description_long'],
                 'short_description': new_place['description_short'],
-                'longitude': new_place['coordinates']['lng'],
-                'latitude': new_place['coordinates']['lat']
             }
         )
         if not created:
             obj.images.all().delete()
-            for image_url in new_place['imgs']:
-                response = requests.get(image_url)
-                file_name = image_url.split('/')[-1]
-                file = ContentFile(response.content)
-                image, created = Image.objects.get_or_create(place=obj, image=file_name)
-                image.image.save(file_name, file)
-                image.save()
-            logging.info(f'Place {new_place["title"]} added')
+        for image_url in new_place['imgs']:
+            response = requests.get(image_url)
+            file_name = image_url.split('/')[-1]
+            file = ContentFile(response.content)
+            image, created = Image.objects.get_or_create(place=obj, image=file_name)
+            image.image.save(file_name, file)
+            image.save()
+        logging.info(f'Place {new_place["title"]} added')
 
 
 
