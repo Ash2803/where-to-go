@@ -28,8 +28,8 @@ class Command(BaseCommand):
             response = requests.get(link)
             response.raise_for_status()
             new_place = response.json()
-        except requests.exceptions.RequestException:
-            traceback.print_exc()
+        except requests.exceptions.RequestException as e:
+            logging.info(f'Given link is not correct\nError: {str(e)}')
             raise SystemExit()
         if Place.objects.filter(title=new_place['title']).exists():
             logging.info(f"Place {new_place['title']} already exists.")
