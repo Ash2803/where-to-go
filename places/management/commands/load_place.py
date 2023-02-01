@@ -31,18 +31,18 @@ class Command(BaseCommand):
         except requests.exceptions.RequestException as e:
             logging.info(f'Given link is not correct\nError: {str(e)}')
             raise SystemExit()
-        if Place.objects.filter(title=new_place['title']).exists():
-            logging.info(f"Place {new_place['title']} already exists.")
-        else:
-            obj, created = Place.objects.update_or_create(
-                title=new_place['title'],
-                defaults={
-                    'long_description': new_place['description_long'],
-                    'short_description': new_place['description_short'],
-                    'longitude': new_place['coordinates']['lng'],
-                    'latitude': new_place['coordinates']['lat']
-                }
-            )
+        obj, created = Place.objects.update_or_create(
+            title=new_place['title'],
+            defaults={
+                'title': new_place['title'],
+                'long_description': new_place['description_long'],
+                'short_description': new_place['description_short'],
+                'longitude': new_place['coordinates']['lng'],
+                'latitude': new_place['coordinates']['lat']
+            }
+        )
+        if not created:
+            obj.images.all().delete()
             for image_url in new_place['imgs']:
                 response = requests.get(image_url)
                 file_name = image_url.split('/')[-1]
@@ -51,4 +51,6 @@ class Command(BaseCommand):
                 image.image.save(file_name, file)
                 image.save()
             logging.info(f'Place {new_place["title"]} added')
+
+
 
