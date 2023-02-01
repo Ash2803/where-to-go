@@ -22,7 +22,7 @@ class Image(models.Model):
                               blank=False)
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images',
                               verbose_name='place')
-    image_order = models.PositiveIntegerField(null=True, blank=True)
+    image_order = models.PositiveIntegerField(null=True, blank=True, default='I')
 
     def __str__(self):
         return f'{self.id} {self.place.title}'
